@@ -19,11 +19,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.6.6  # or latest stable version
-  
+          terraform_version: 1.6.6  # Use latest if needed
 
       - name: Get stage from tag
         id: stage
@@ -36,12 +36,11 @@ jobs:
       - name: Terraform init
         run: terraform -chdir=terraform init
 
-     - name: Terraform apply
-       run: |
-         terraform -chdir=terraform apply \
+      - name: Terraform apply
+        run: |
+          terraform -chdir=terraform apply \
             -auto-approve \
             -var-file=terraform/${{ steps.stage.outputs.stage }}.tfvars \
             -var="config_file_url=${{ steps.config.outputs.config_file_url }}" \
             -var="stage=${{ steps.stage.outputs.stage }}"
-
-
+s
