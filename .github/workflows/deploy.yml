@@ -43,4 +43,4 @@ jobs:
             -var-file=terraform/${{ steps.stage.outputs.stage }}.tfvars \
             -var="config_file_url=${{ steps.config.outputs.config_file_url }}" \
             -var="stage=${{ steps.stage.outputs.stage }}"
-s
+
