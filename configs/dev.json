@@ -1,0 +1,8 @@
+{
+
+"stage" : "dev",
+"java_version" : "21",
+"repo_url" : "https://github.com/techeazy-consulting/techeazy-devops",
+"shutdown_after_minutes" : 10
+
+}

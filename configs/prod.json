@@ -1,0 +1,8 @@
+{
+
+"stage" : "prod",
+"java_version" : "19",
+"repo_url" : "https://github.com/techeazy-consulting/techeazy-devops",
+"shutdown_after_minutes" : 15
+
+}
