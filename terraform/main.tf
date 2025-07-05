@@ -1,7 +1,6 @@
 provider "aws" {
-region = var.region 
+  region = var.region
 }
-
 
 resource "aws_security_group" "ec2_sg" {
   name        = "allow_ssh_http"
@@ -37,19 +36,30 @@ resource "aws_security_group" "ec2_sg" {
 }
 
 resource "aws_instance" "EC2_deploy_on_aws" {
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  key_name               = var.key_name
+  vpc_security_group_ids = [aws_security_group.ec2_sg.id]
 
-ami = var.ami_id
-instance_type = var.instance_type
-key_name = var.key_name
-vpc_security_group_ids = [aws_security_group.ec2_sg.id]
-user_data = <<-EOF
-sudo apt install -y curl jq awscli
-curl -o /home/ubuntu/config.json ${var.config_file_url}
-bash /home/ubuntu/setup.sh ${var.stage}
-EOF
+  user_data = <<-EOF
+              #!/bin/bash
+              apt update -y
+              apt install -y curl jq awscli
 
-tags = {
-    Name = "EC2-${var.stage}"
+              # Download config file
+              curl -o /home/ubuntu/config.json "${var.config_file_url}"
+
+              # Download setup.sh if not pre-baked in AMI
+              curl -o /home/ubuntu/setup.sh "https://raw.githubusercontent.com/${var.repo}/main/scripts/setup.sh"
+              chmod +x /home/ubuntu/setup.sh
+
+              # Execute setup
+              bash /home/ubuntu/setup.sh ${var.stage}
+              EOF
+
+  tags = {
+    Name  = "EC2-${var.stage}"
+    Stage = var.stage
   }
-
 }
+

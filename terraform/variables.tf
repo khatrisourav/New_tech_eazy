@@ -6,7 +6,11 @@ variable "region" {
 type = string 
 }
 
+variable "repo" {
+type = string
+default = "https://github.com/khatrisourav/New_tech_eazy.git"
 
+}
 
 variable  "ami_id" {
 type= string

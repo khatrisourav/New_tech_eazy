@@ -43,4 +43,11 @@ jobs:
             -var-file=${{ steps.stage.outputs.stage }}.tfvars \
             -var="config_file_url=${{ steps.config.outputs.config_file_url }}" \
             -var="stage=${{ steps.stage.outputs.stage }}"
+            
+      - name: Wait for 20 minutes
+        run: sleep 1200
+
+      - name: Terraform destroy
+        working-directory: terraform
+        run: terraform destroy -auto-approve -var="stage=${{ env.STAGE }}"     
 
