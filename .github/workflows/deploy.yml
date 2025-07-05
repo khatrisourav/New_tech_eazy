@@ -1,4 +1,4 @@
-name: "The new assignment 1 with staging parameter123456789"
+name: "The new assignment 1 with staging parameter1234567890
 
 on:
   push:
@@ -40,7 +40,7 @@ jobs:
         run: |
           terraform -chdir=terraform apply \
             -auto-approve \
-            -var-file=terraform/${{ steps.stage.outputs.stage }}.tfvars \
+            -var-file=${{ steps.stage.outputs.stage }}.tfvars \
             -var="config_file_url=${{ steps.config.outputs.config_file_url }}" \
             -var="stage=${{ steps.stage.outputs.stage }}"
 
