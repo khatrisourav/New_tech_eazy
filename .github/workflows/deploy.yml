@@ -36,11 +36,12 @@ jobs:
       - name: Terraform init
         run: terraform -chdir=terraform init
 
-      - name: Terraform apply
-        run: |
-          terraform -chdir=terraform apply \
+     - name: Terraform apply
+       run: |
+         terraform -chdir=terraform apply \
             -auto-approve \
-            -var-file=${{ steps.stage.outputs.stage }}.tfvars \
-            -var="config_file_url=${{ steps.config.outputs.config_file_url }}"
+            -var-file=terraform/${{ steps.stage.outputs.stage }}.tfvars \
+            -var="config_file_url=${{ steps.config.outputs.config_file_url }}" \
             -var="stage=${{ steps.stage.outputs.stage }}"
+
 
