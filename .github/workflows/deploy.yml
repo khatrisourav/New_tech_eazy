@@ -1,4 +1,4 @@
-name: "The new assignment 1 with staging parameter12123"
+name: "The new assignment 1 with staging parameter121234"
 
 on:
   push:
@@ -47,11 +47,7 @@ jobs:
       - name: Wait for 20 minutes
         run: sleep 500
 
-      - name: Terraform destroy
-        working-directory: terraform
-        run:  |
-          terraform destroy 
-          -auto-approve \
-          -var="config_file_url=${{ steps.config.outputs.config_file_url }}" \
-          -var="stage=${{ steps.stage.outputs.stage }}"
+      - name: 🔥 Terraform Destroy Infra
+        working-directory: ./terraform
+        run: terraform destroy -auto-approve -var="stage=${{ env.STAGE }}"
 
