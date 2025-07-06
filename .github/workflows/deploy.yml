@@ -1,4 +1,4 @@
-name: "The new assignment 1 with staging parameter12345678901"
+name: "The new assignment 1 with staging parameter121"
 
 on:
   push:
