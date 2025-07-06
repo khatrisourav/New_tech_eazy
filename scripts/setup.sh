@@ -3,7 +3,8 @@ CONFIG_FILE="/home/ubuntu/config.json"
 
 JAVA_VERSION=$(jq -r '.java_version' $CONFIG_FILE)
 REPO_URL=$(jq -r '.repo_url' $CONFIG_FILE)
-
+echo $JAVA_VERSION  >> java.txt
+echo $REPO_URL >> repo.txt
 sudo apt update -y
 sudo apt install -y openjdk-${JAVA_VERSION}-jdk git unzip
 

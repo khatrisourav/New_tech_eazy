@@ -45,7 +45,7 @@ jobs:
             -var="stage=${{ steps.stage.outputs.stage }}"
             
       - name: Wait for 20 minutes
-        run: sleep 1200
+        run: sleep 500
 
       - name: Terraform destroy
         working-directory: terraform
